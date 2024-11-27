@@ -1,0 +1,887 @@
+{
+    "type": "MySQLNotebook",
+    "version": "1.0",
+    "caption": "DB Notebook",
+    "content": "\\about\nCREATE DATABASE SpotifyProject;\n\nUSE SpotifyProjectFinal;\nSET SQL_SAFE_UPDATES = 0;\n-- Users Table\nCREATE TABLE Users (\n    UserID INT PRIMARY KEY AUTO_INCREMENT,\n    UserName VARCHAR(250),\n    Email VARCHAR(250),\n    Passwords VARCHAR(250)\n);\n\n\n-- Profile Table\nCREATE TABLE Profile (\n    ProfileID INT PRIMARY KEY AUTO_INCREMENT,\n    Bio TEXT,\n    Picture VARCHAR(250),\n    UserID INT,\n    FOREIGN KEY (UserID) REFERENCES Users(UserID)\n);\nCREATE TABLE Subscriptions (\n    SubscriptionID INT PRIMARY KEY AUTO_INCREMENT,\n    StartDate DATE, \n    EndDate DATE,\n    ProfileID INT,\n    FOREIGN KEY (ProfileID) REFERENCES Profile(ProfileID)\n);\nCREATE TABLE Artists (\n    ArtistID INT PRIMARY KEY AUTO_INCREMENT,\n    Bio TEXT,\n    ProfileID INT,\n    FOREIGN KEY (ProfileID) REFERENCES Profile(ProfileID)\n);\n\nCREATE TABLE Musics (\n    MusicID INT PRIMARY KEY AUTO_INCREMENT,\n    Title VARCHAR(250),\n    Duration INT,\n    Genre VARCHAR(250),\n    ArtistID INT,\n    FOREIGN KEY (ArtistID) REFERENCES Artists(ArtistID)\n);\n\nCREATE TABLE Analytics (\n    AnalyticID INT PRIMARY KEY AUTO_INCREMENT,\n    Data_ TEXT,\n    AnalyticDate DATE,\n    MusicID INT,\n    FOREIGN KEY (MusicID) REFERENCES Musics(MusicID)\n);\nCREATE TABLE PlaybackHistorys (\n    HistoryID INT PRIMARY KEY AUTO_INCREMENT,\n    PlayDate DATE,\n    Duration INT,\n    UserID INT,\n    MusicID INT,\n    FOREIGN KEY (UserID) REFERENCES Users(UserID),\n    FOREIGN KEY (MusicID) REFERENCES Musics(MusicID)\n);\nCREATE TABLE Feedbacks (\n    FeedbackID INT PRIMARY KEY AUTO_INCREMENT,\n    Comment_ TEXT,\n    UserID INT,\n    MusicID INT,\n    FOREIGN KEY (UserID) REFERENCES Users(UserID),\n    FOREIGN KEY (MusicID) REFERENCES Musics(MusicID)\n);\nCREATE TABLE Playlists (\n    PlaylistID INT PRIMARY KEY AUTO_INCREMENT,\n    PlaylistName VARCHAR(250),\n    PlaylistDescription TEXT,\n    UserID INT,\n    FOREIGN KEY (UserID) REFERENCES Users(UserID)\n);\nCREATE TABLE PlaylistContents (\n    PlaylistID INT,\n    ContentID INT,\n    PRIMARY KEY (PlaylistID, ContentID),\n    FOREIGN KEY (PlaylistID) REFERENCES Playlists(PlaylistID),\n    FOREIGN KEY (ContentID) REFERENCES Musics(MusicID)\n);\nCREATE TABLE Compliances (\n    ComplianceID INT PRIMARY KEY AUTO_INCREMENT,\n    ComplianceStatus VARCHAR(250),\n    ComplianceDate DATE\n);\nCREATE TABLE Reports (\n    ReportID INT PRIMARY KEY AUTO_INCREMENT,\n    ReportType VARCHAR(250),\n    GeneratedDate DATE,\n    Content TEXT,\n    ComplianceID INT,\n    FOREIGN KEY (ComplianceID) REFERENCES Compliances(ComplianceID)\n);\nCREATE TABLE Admins (\n    AdminID INT PRIMARY KEY AUTO_INCREMENT,\n    AdminRole VARCHAR(250),\n    AdminName VARCHAR(250),\n    ComplianceID INT,\n    FOREIGN KEY (ComplianceID) REFERENCES Compliances(ComplianceID)\n);\nCREATE TABLE Devices (\n    DeviceID INT PRIMARY KEY AUTO_INCREMENT,\n    Specifications TEXT,\n    Firmware VARCHAR(250)\n);\nCREATE TABLE StreamingPlatforms (\n    PlatformID INT PRIMARY KEY AUTO_INCREMENT,\n    OS VARCHAR(250),\n    LastUsedDate DATE,\n    DeviceID INT,\n    FOREIGN KEY (DeviceID) REFERENCES Devices(DeviceID)\n);\nCREATE TABLE Ads (\n    AdID INT PRIMARY KEY AUTO_INCREMENT,\n    Content TEXT,\n    Duration INT,\n    DeviceID INT,\n    FOREIGN KEY (DeviceID) REFERENCES Devices(DeviceID)\n);\nCREATE TABLE AdminCompliances (\n    AdminID INT,\n    ComplianceID INT,\n    PRIMARY KEY (AdminID, ComplianceID),\n    FOREIGN KEY (AdminID) REFERENCES Admins(AdminID),\n    FOREIGN KEY (ComplianceID) REFERENCES Compliances(ComplianceID)\n);\nCREATE TABLE StreamingMusics (\n    PlatformID INT,\n    MusicID INT,\n    PRIMARY KEY (PlatformID, MusicID),\n    FOREIGN KEY (PlatformID) REFERENCES StreamingPlatforms(PlatformID),\n    FOREIGN KEY (MusicID) REFERENCES Musics(MusicID)\n);\n\n",
+    "options": {
+        "tabSize": 4,
+        "insertSpaces": true,
+        "indentSize": 4,
+        "defaultEOL": "CRLF",
+        "trimAutoWhitespace": true
+    },
+    "viewState": {
+        "cursorState": [
+            {
+                "inSelectionMode": false,
+                "selectionStart": {
+                    "lineNumber": 137,
+                    "column": 1
+                },
+                "position": {
+                    "lineNumber": 137,
+                    "column": 1
+                }
+            }
+        ],
+        "viewState": {
+            "scrollLeft": 0,
+            "firstPosition": {
+                "lineNumber": 109,
+                "column": 1
+            },
+            "firstPositionDeltaTop": -5
+        },
+        "contributionsState": {
+            "editor.contrib.folding": {},
+            "editor.contrib.wordHighlighter": false
+        }
+    },
+    "contexts": [
+        {
+            "state": {
+                "start": 1,
+                "end": 1,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 2,
+                            "content": "Welcome to the MySQL Shell - DB Notebook.\n\nPress Ctrl+Enter to execute the code block.\n\nExecute \\sql to switch to SQL, \\js to JavaScript and \\ts to TypeScript mode.\nExecute \\help or \\? for help;",
+                            "language": "ansi"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 6
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 2,
+                "end": 2,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 0,
+                            "index": 0,
+                            "content": "MySQL Error (1007): Can't create database 'spotifyproject'; database exists",
+                            "language": "ansi"
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": ""
+                    }
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 31
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 3,
+                "end": 3,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "6668ec66-2882-44bc-c62f-9e25f212ba39",
+                            "content": "OK, 1 row affected in 2.769ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 4,
+                "end": 4,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "f001c1d1-9bb8-49a1-f6c8-cd82cba315c1",
+                            "content": "OK, 0 records retrieved in 0.55ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 24
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 5,
+                "end": 5,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "c940101f-60a6-4d69-f27a-fbd3e08c04a6",
+                            "content": "OK, 0 records retrieved in 1.004ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 25
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 25,
+                            "length": 0
+                        },
+                        "contentStart": 24,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 6,
+                "end": 12,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "f00ae5ff-575c-4f64-c9dd-538f8fa4d17a",
+                            "content": "OK, 0 records retrieved in 8.267ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 159
+                        },
+                        "contentStart": 15,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 13,
+                "end": 13,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 17,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 14,
+                "end": 14,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 39,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 15,
+                "end": 22,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "ef2815f4-b620-43c7-9b28-9428989a37ec",
+                            "content": "OK, 0 records retrieved in 15.554ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 194
+                        },
+                        "contentStart": 17,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 23,
+                "end": 29,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "c830d3cd-2722-4b1c-8d94-1e12af0253c2",
+                            "content": "OK, 0 records retrieved in 17.538ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 198
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 30,
+                "end": 36,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "25175018-749e-45c0-a0f7-f7a3878c9798",
+                            "content": "OK, 0 records retrieved in 18.971ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 161
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 161,
+                            "length": 1
+                        },
+                        "contentStart": 160,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 37,
+                "end": 45,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "05653192-76a4-408a-dee8-749866d3830b",
+                            "content": "OK, 0 records retrieved in 20.043ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 208
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 208,
+                            "length": 1
+                        },
+                        "contentStart": 207,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 46,
+                "end": 52,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "599ea2e5-cc06-4376-ba05-7fb72e22f1b3",
+                            "content": "OK, 0 records retrieved in 33.97ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 183
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 53,
+                "end": 61,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "9a7d9815-94a8-46b6-aa23-d1f5e3d863b9",
+                            "content": "OK, 0 records retrieved in 23.866ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 254
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 62,
+                "end": 69,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "32183a44-c497-40c5-d8e5-7ede91302ec0",
+                            "content": "OK, 0 records retrieved in 19.787ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 230
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 70,
+                "end": 76,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "c8ab879d-0951-4744-fe8f-1a6abaefe5cd",
+                            "content": "OK, 0 records retrieved in 17.564ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 201
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 77,
+                "end": 83,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "f20aca8e-1d67-4c1c-9af0-32f2b007e430",
+                            "content": "OK, 0 records retrieved in 16.723ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 232
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 84,
+                "end": 88,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "6333bb29-ce40-4078-bcae-acaa26689468",
+                            "content": "OK, 0 records retrieved in 8.619ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 137
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 89,
+                "end": 96,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "66aa3188-e12e-4a50-99d0-71c1b8bfebe3",
+                            "content": "OK, 0 records retrieved in 25.776ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 231
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 97,
+                "end": 103,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "9a66cb20-0845-4347-ae30-cd35620bbeb5",
+                            "content": "OK, 0 records retrieved in 20.755ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 214
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 104,
+                "end": 108,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "2d621a7b-9a4a-420c-aff6-230e35fc6ca2",
+                            "content": "OK, 0 records retrieved in 10.025ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 121
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 109,
+                "end": 115,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "666d658f-e69e-4f65-c624-e9ba2528d496",
+                            "content": "OK, 0 records retrieved in 19.196ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 201
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 116,
+                "end": 122,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "735c04a0-98d5-40f9-8183-0b55b5c555ff",
+                            "content": "OK, 0 records retrieved in 18.661ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 172
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 123,
+                "end": 129,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "4c3115e8-8a70-495e-98eb-8accd8d5f4a8",
+                            "content": "OK, 0 records retrieved in 19.334ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 236
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 130,
+                "end": 136,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "d5b4b28a-e1a2-445b-aa63-5977d85d9d9a",
+                            "content": "OK, 0 records retrieved in 20.944ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 234
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 137,
+                "end": 137,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 138,
+                "end": 138,
+                "language": "mysql",
+                "currentSet": 1,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
+        }
+    ]
+}
