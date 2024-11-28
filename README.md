@@ -9,8 +9,8 @@ Welcome to the **Spotify Database Project**, a university project that involves 
 - [Database Design](#database-design)
 - [Setup Instructions](#setup-instructions)
 - [Usage](#usage)
-- [Project Files](#project-files)
-- [License](#license)
+- [Project Files](https://github.com/MOHAMMAD-KIMIA/Spotify-Database-Project)
+- [License](https://github.com/MOHAMMAD-KIMIA/Spotify-Database-Project?tab=MIT-1-ov-file)
 
 ---
 
