@@ -162,5 +162,3 @@ CREATE TABLE StreamingMusic (
     FOREIGN KEY (PlatformID) REFERENCES StreamingPlatform(PlatformID),
     FOREIGN KEY (MusicID) REFERENCES Music(MusicID)
 );
-
-select * from Ad
